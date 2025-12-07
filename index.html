@@ -1,0 +1,133 @@
+<!--
+Arquivo: site_romantico_emyle.html
+Instruções rápidas:
+- Substitua o valor da variável `NOME` se quiser outro nome.
+- Para adicionar uma foto, substitua o elemento <div class="photo"> pelo <img src="sua-foto.jpg" alt="Emyle"> ou cole a URL da imagem.
+- Para tocar música, adicione um <audio src="sua-musica.mp3" autoplay loop></audio> (certifique-se de ter direitos sobre o arquivo).
+-->
+
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Para Emyle — Um site romântico</title>
+  <style>
+    :root{
+      --bg1:#d79aff;
+      --bg2:#fad0c4;
+      --card:#ffffffcc;
+      --accent:#9a6bff;
+      --text:#4b2d2d;
+      --soft-shadow: 0 8px 24px rgba(71,20,20,0.12);
+      --glass: rgba(255,255,255,0.75);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; color:var(--text)}
+    body{
+      background: linear-gradient(135deg,var(--bg1),var(--bg2));
+      display:flex;align-items:center;justify-content:center;padding:32px;
+    }
+    .stage{
+      width:100%;max-width:920px;background:linear-gradient(180deg, rgba(255,255,255,0.14), rgba(255,255,255,0.06));border-radius:20px;padding:28px;box-shadow:var(--soft-shadow);backdrop-filter: blur(6px);
+      position:relative;overflow:hidden;
+    }
+    /* floating hearts */
+    .heart{position:absolute;width:18px;height:18px;background:var(--accent);transform:rotate(45deg);border-radius:4px;opacity:0.9}
+    .heart:after,.heart:before{content:'';position:absolute;width:18px;height:18px;background:var(--accent);border-radius:50%}
+    .heart:before{top:-9px;left:0}
+    .heart:after{left:9px;top:0}
+    /* animate many hearts with CSS variables */
+    .hearts{position:absolute;inset:0;pointer-events:none}
+    .hearts .heart{animation:float var(--dur) linear infinite;left:var(--x);top:var(--y);opacity:var(--o);transform:scale(var(--s)) rotate(45deg)}
+    @keyframes float{0%{transform:translateY(0) scale(var(--s)) rotate(45deg);opacity:var(--o)}50%{opacity:0.9}100%{transform:translateY(-420px) scale(var(--s)) rotate(45deg);opacity:0}}
+
+    .content{display:flex;gap:24px;align-items:center}
+    .photo{width:320px;height:220px;border-radius:20px;background:linear-gradient(180deg,#fff3,#ffffff00);display:flex;align-items:center;justify-content:center;font-weight:600;color:#7a4b4b;box-shadow:var(--soft-shadow);}
+    .card{flex:1;padding:20px;border-radius:12px;background:var(--card)}
+    h1{margin:0 0 8px;font-size:28px}
+    p.lead{margin:0 0 16px;font-size:16px;line-height:1.4}
+    .meta{font-size:14px;color:#6a4b4b;margin-bottom:12px}
+    .btn{display:inline-block;padding:10px 16px;border-radius:999px;background:var(--accent);color:white;text-decoration:none;font-weight:600;box-shadow:0 6px 18px rgba(255,107,129,0.18)}
+
+    .letter{margin-top:12px;padding:14px;border-radius:10px;background:var(--glass);max-height:0;overflow:hidden;transition:all .45s ease}
+    .letter.open{max-height:560px}
+
+    footer{margin-top:18px;font-size:13px;color:#6a4b4b}
+
+    /* responsive */
+    @media (max-width:720px){
+      .content{flex-direction:column}
+      .photo{width:160px;height:160px}
+    }
+  </style>
+</head>
+<body>
+  <main class="stage" role="main">
+    <div class="hearts" aria-hidden="true">
+      <!-- generate hearts via inline styles -->
+      <div class="heart" style="--x:8%;--y:80%;--dur:9s;--s:1.2;--o:.9"></div>
+      <div class="heart" style="--x:22%;--y:92%;--dur:11s;--s:0.9;--o:.8"></div>
+      <div class="heart" style="--x:38%;--y:85%;--dur:8s;--s:1.1;--o:.85"></div>
+      <div class="heart" style="--x:56%;--y:95%;--dur:10s;--s:1.0;--o:.75"></div>
+      <div class="heart" style="--x:72%;--y:88%;--dur:12s;--s:0.95;--o:.8"></div>
+      <div class="heart" style="--x:88%;--y:92%;--dur:9.5s;--s:1.25;--o:.9"></div>
+    </div>
+
+    <div class="content">
+      <div class="photo" id="photo">
+        <!-- Substitua por <img src="..."> se quiser foto -->
+        <span>Você é o detalhe mais bonito que Deus colocou na minha vida. ❤️</span>
+      </div>
+
+      <div class="card">
+        <h1>Para <span id="name">Princesa</span></h1>
+        <div class="meta">Um pequeno espaço que criei só para você</div>
+        <p class="lead" id="lead">Cada dia ao seu lado me lembra o quanto a vida é cheia de doçura. Obrigado por ser meu abrigo e minha alegria. 💌</p>
+
+        <a href="#" class="btn" id="toggleBtn">Ler minha carta</a>
+
+        <div class="letter" id="letter">
+          <p>Amor,</p>
+          <p>Quando penso em todas as pequenas coisas que você faz — seu sorriso, sua voz, sua maneira de ver o mundo — sinto que ganhei um presente todos os dias. Quero construir lembranças com você, rir até doer a barriga e estar presente nos dias fáceis e nos dias difíceis.</p>
+          <p>Com todo meu carinho,</p>
+          <p><strong>— Princeso</strong></p>
+        </div>
+
+        <footer>Não é sobre encontrar alguém para viver, é sobre encontrar alguém sem quem a vida não faz sentido.</footer>
+      </div>
+    </div>
+
+    <div style="position:absolute;right:18px;bottom:18px;"> 
+      <button id="editBtn" class="btn" style="background:transparent;color:var(--text);box-shadow:none;border:1px solid rgba(0,0,0,0.06);padding:8px 12px">Editar</button>
+    </div>
+  </main>
+
+  <script>
+    const toggleBtn = document.getElementById('toggleBtn');
+    const letter = document.getElementById('letter');
+    const editBtn = document.getElementById('editBtn');
+
+    toggleBtn.addEventListener('click', (e)=>{
+      e.preventDefault();
+      letter.classList.toggle('open');
+      toggleBtn.textContent = letter.classList.contains('open') ? 'Fechar carta' : 'Ler minha carta';
+    });
+
+    editBtn.addEventListener('click', ()=>{
+      const novoNome = prompt('Digite o nome (ex: Emyle):', document.getElementById('name').textContent);
+      if(novoNome!==null) document.getElementById('name').textContent = novoNome;
+
+      const novoLead = prompt('Digite a mensagem curta que aparece abaixo do nome:', document.getElementById('lead').textContent);
+      if(novoLead!==null) document.getElementById('lead').textContent = novoLead;
+
+      const novaCarta = prompt('Digite o texto da carta completa (aceita \n para novas linhas):', document.getElementById('letter').innerText);
+      if(novaCarta!==null){
+        // simples quebra de linha em parágrafos
+        const p = novaCarta.split('\n').map(s=>`<p>${s}</p>`).join('');
+        document.getElementById('letter').innerHTML = p + '<p><strong>— Eu</strong></p>';
+      }
+    });
+  </script>
+</body>
+</html>
